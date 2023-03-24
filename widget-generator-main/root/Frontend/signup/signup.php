@@ -17,12 +17,12 @@
 
 <body>
 
-<!--
+
 <?php
-  include_once 'navbar.php';
+  include_once '../navbar.php';
  ?>
 
--->
+
 
  <div class="signup-form">
   <!--  <form action="signup.inc.php" method="post"> -->
