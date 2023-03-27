@@ -213,7 +213,10 @@
 
 
       <!--SIGNUP FORMULAR -->
-      <div class="nav-item dropdown">
+
+        <a href="signup/signup.jsx">Signup</a>
+
+        <div class="nav-item dropdown">
         <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle sign-up-btn">Sign up</a>
         <div class="dropdown-menu action-form">
          <!-- <form action="/actions/confirmation.php" method="post"> -->
