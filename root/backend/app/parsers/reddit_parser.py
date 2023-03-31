@@ -6,7 +6,7 @@ import praw
 import prawcore
 from dotenv import load_dotenv
 
-from root.backend.app.utils import Post
+from ..utils import Post
 
 load_dotenv()
 
