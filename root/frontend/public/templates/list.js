@@ -39,9 +39,9 @@ const formatDate = (rawDate) => {
 const renderPostContent = (postData, imagesHtml) => {
     return `
     <div class="card h-auto">
-        <a href="https://www.reddit.com${postData.url}" target="_blank">
+        <a class="text-decoration-none" style="color: black" href="https://www.reddit.com${postData.url}" target="_blank">
             <div class="card-header">
-                <h5 class="card-title mb-0">${postData.title}</h5>
+                <h5 class="card-title mb-0 text-center">${postData.title}</h5>
             </div>
         </a>
         ${imagesHtml}
@@ -95,7 +95,13 @@ const renderPost = (postData, postsList) => {
     postsList.appendChild(postItem);
 }
 
-const renderPosts = (posts, customTag) => {
+const renderPosts = (subreddit, posts, customTag) => {
+    // Create header with subreddit name and make it as link to subreddit
+    const header = document.createElement('h2');
+    header.classList.add('text-center', 'my-5','text-decoration-underline','fw-normal');
+    header.innerHTML = `<a style="color: black" href="https://www.reddit.com/r/${subreddit}" target="_blank">r/${subreddit}</a>`;
+
+
     const container = document.createElement('div');
     container.classList.add('container', 'w-100');
 
@@ -107,8 +113,9 @@ const renderPosts = (posts, customTag) => {
     });
 
     container.appendChild(postList);
-    // Add the container after the custom tag
-    customTag.insertAdjacentElement('afterend', container);
+    // Add header and container after custom tag
+    customTag.insertAdjacentElement('afterend', header);
+    header.insertAdjacentElement('afterend', container);
 }
 
 
@@ -128,7 +135,7 @@ const fetchPosts = async (subreddit, limit) => {
 const renderWidget = async (subreddit, limit, customTag) => {
     const posts = await fetchPosts(subreddit, limit);
     if (posts) {
-        renderPosts(posts.data, customTag);
+        renderPosts(subreddit, posts.data, customTag);
     }
 }
 
