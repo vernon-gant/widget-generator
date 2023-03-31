@@ -62,7 +62,7 @@ const formatDate = (rawDate) => {
     return `${ordinal(monthDay)} ${day} ${year}`;
 };
 
-const renderPostContent = (postData, imagesHtml) => {
+const renderPostContent = (postData, mediaHtml) => {
     return `
     <div class="card h-auto w-100">
         <a class="text-decoration-none" style="color: black" href="https://www.reddit.com${postData.url}" target="_blank">
@@ -70,7 +70,7 @@ const renderPostContent = (postData, imagesHtml) => {
                 <h5 class="card-title mb-0 text-center">${postData.title}</h5>
             </div>
         </a>
-        ${imagesHtml}
+        ${mediaHtml}
         ${postData.content ? `<div class="card-body"><p class="card-text text-center">${prepareContent(postData.content)}</p></div>` : ''}
         <div class="card-footer">
             <div class="d-flex justify-content-around align-items-center w-75 m-auto flex-wrap">
@@ -96,12 +96,10 @@ const renderPostContent = (postData, imagesHtml) => {
 }
 
 const renderImages = (postData) => {
-    let imagesHtml = '';
-
     if (postData.images.length === 1) {
-        imagesHtml = `<img src="${postData.images[0]}" class="card-img-top image-fixed-height" alt="Image">`;
+        return `<img src="${postData.images[0]}" class="card-img-top image-fixed-height" alt="Image">`;
     } else if (postData.images.length > 1) {
-        imagesHtml = `
+        let imagesHtml = `
         <div id="car${postData.id}" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">`;
 
@@ -122,17 +120,31 @@ const renderImages = (postData) => {
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>`;
+        return imagesHtml;
     }
-    return imagesHtml;
+}
+
+const renderVideo = (postData) => {
+    return `<video class="card-img-top" src="${postData.video}" controls></video>`
+}
+
+const renderMedia = (postData) => {
+    if (postData.images.length > 0) {
+        return renderImages(postData);
+    } else if (postData.video) {
+        return renderVideo(postData);
+    } else {
+        return '';
+    }
 }
 
 const renderPost = (postData, postsList) => {
     const postItem = document.createElement('div');
     postItem.classList.add('col-10', 'col-md-6', 'col-lg-4', 'my-3', 'd-flex', 'align-items-center');
 
-    let imagesHtml = renderImages(postData);
+    let mediaHtml = renderMedia(postData);
 
-    postItem.innerHTML = renderPostContent(postData, imagesHtml);
+    postItem.innerHTML = renderPostContent(postData, mediaHtml);
 
     postsList.appendChild(postItem);
 }
@@ -188,6 +200,34 @@ const renderWidget = async (subreddit, limit, customTag) => {
                 "likes": 1,
                 "title": "r/LevusWorkstation Lounge",
                 "url": "/r/LevusWorkstation/comments/w0h71o/rlevusworkstation_lounge/"
+            },
+            {
+                "author": "No-Comparison-9307",
+                "comments": 80,
+                "content": "",
+                "date": "Thu, 30 Mar 2023 17:00:12 GMT",
+                "id": "126pkdq",
+                "images": [],
+                "likes": 1041,
+                "title": "Proof of Work comes in many forms",
+                "url": "/r/Bitcoin/comments/126pkdq/proof_of_work_comes_in_many_forms/",
+                "video": [
+                    "https://v.redd.it/gdjaogb65wqa1/DASH_1080.mp4?source=fallback"
+                ]
+            },
+            {
+                "author": "s_detta",
+                "comments": 16,
+                "content": "",
+                "date": "Fri, 31 Mar 2023 05:28:25 GMT",
+                "id": "1278oxy",
+                "images": [],
+                "likes": 233,
+                "title": "Felt inspired last night and ended up making this Bitcoin compilation video.. hope you guys like it!",
+                "url": "/r/Bitcoin/comments/1278oxy/felt_inspired_last_night_and_ended_up_making_this/",
+                "video": [
+                    "https://v.redd.it/lao1cmy6c1ra1/DASH_1080.mp4?source=fallback"
+                ]
             },
             {
                 "author": "druunavt",
