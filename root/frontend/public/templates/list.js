@@ -21,6 +21,32 @@ const loadStyleSheet = (href) => {
     });
 }
 
+const prepareContent = (content) => {
+    // Remove HTML entities
+    const decoded = content.replace(/&\S+?;/g, '');
+    //Relpace [] and () with text to ''
+    const bracketsRemoved = decoded.replace(/\[.*?\]/g, '');
+    const bracketsRemoved2 = bracketsRemoved.replace(/\(.*?\)/g, '');
+    // Remove all markdown except and links
+    const markdownRemoved = bracketsRemoved2.replace(/(?<!\()(\*|_|\~|`|>)/g, '');
+    // Remove newline characters and backslashes
+    const linebreaksAndBackslashesRemoved = markdownRemoved.replace(/[\n\\]+/g, ' ');
+    // Remove all (http*) and (https*) with and without braces
+    const httpRemoved = linebreaksAndBackslashesRemoved.replace(/(http|https)\S+/g, '');
+    // Remove all n with leading whitespace
+    const nRemoved = httpRemoved.replace(/\s+n/g, ' ');
+    // Remove extra whitespace
+    let spacesBeforeUnderscoresRemoved = nRemoved.replace(/\s\s+/g, ' ');
+    // Remove spaces before underscores in URLs 100 times
+    for (let i = 0; i < 100; i++) {
+        spacesBeforeUnderscoresRemoved = spacesBeforeUnderscoresRemoved.replace(/(\s+)_/g, '_');
+    }
+    // If content final version is empty, set it to 'Something interesting'
+    if (spacesBeforeUnderscoresRemoved === '') spacesBeforeUnderscoresRemoved = 'Something interesting';
+
+    return spacesBeforeUnderscoresRemoved.slice(0, 200) + '...'
+}
+
 const formatDate = (rawDate) => {
     const date = new Date(rawDate);
     const day = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(date);
@@ -38,14 +64,14 @@ const formatDate = (rawDate) => {
 
 const renderPostContent = (postData, imagesHtml) => {
     return `
-    <div class="card h-auto">
+    <div class="card h-auto w-100">
         <a class="text-decoration-none" style="color: black" href="https://www.reddit.com${postData.url}" target="_blank">
             <div class="card-header">
                 <h5 class="card-title mb-0 text-center">${postData.title}</h5>
             </div>
         </a>
         ${imagesHtml}
-        ${postData.content ? `<div class="card-body"><p class="card-text">${postData.content.slice(0, 200)}</p></div>` : ''}
+        ${postData.content ? `<div class="card-body"><p class="card-text text-center">${prepareContent(postData.content)}</p></div>` : ''}
         <div class="card-footer">
             <div class="d-flex justify-content-around align-items-center w-75 m-auto flex-wrap">
             <div class="d-flex align-items-center">
@@ -102,7 +128,7 @@ const renderImages = (postData) => {
 
 const renderPost = (postData, postsList) => {
     const postItem = document.createElement('div');
-    postItem.classList.add('col-10','col-md-6', 'col-lg-4', 'my-3', 'd-flex', 'align-items-center');
+    postItem.classList.add('col-10', 'col-md-6', 'col-lg-4', 'my-3', 'd-flex', 'align-items-center');
 
     let imagesHtml = renderImages(postData);
 
@@ -114,7 +140,7 @@ const renderPost = (postData, postsList) => {
 const renderPosts = (subreddit, posts, customTag) => {
     // Create header with subreddit name and make it as link to subreddit
     const header = document.createElement('h2');
-    header.classList.add('text-center', 'my-5','text-decoration-underline','fw-normal');
+    header.classList.add('text-center', 'my-5', 'text-decoration-underline', 'fw-normal');
     header.innerHTML = `<a style="color: black" href="https://www.reddit.com/r/${subreddit}" target="_blank">r/${subreddit}</a>`;
 
 
