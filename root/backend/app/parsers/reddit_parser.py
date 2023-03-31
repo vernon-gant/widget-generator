@@ -31,6 +31,18 @@ def is_image_submission(submission) -> bool:
     return any(domain in submission.url for domain in image_domains)
 
 
+def is_video_submission(submission) -> bool:
+    video_domains = ['v.redd.it']
+    return any(domain in submission.url for domain in video_domains)
+
+
+def get_video_from_submission(submission) -> list:
+    if is_video_submission(submission):
+        return [submission.secure_media["reddit_video"]["fallback_url"]]
+    else:
+        return []
+
+
 def get_image_from_submission(submission) -> list:
     if is_image_submission(submission):
         return [image["source"]["url"] for image in submission.preview["images"]]
@@ -55,7 +67,8 @@ def get_reddit_posts(subreddit: str, limit: int = 10) -> List[Post]:
                 comments=submission.num_comments,
                 url=submission.permalink,
                 date=datetime.fromtimestamp(submission.created_utc),
-                id=submission.id
+                id=submission.id,
+                video=get_video_from_submission(submission)
             )._asdict())
         return results
     except prawcore.exceptions.NotFound:
