@@ -55,6 +55,7 @@ def get_reddit_posts(subreddit: str, limit: int = 10) -> List[Post]:
                 comments=submission.num_comments,
                 url=submission.permalink,
                 date=datetime.fromtimestamp(submission.created_utc),
+                id=submission.id
             )._asdict())
         return results
     except prawcore.exceptions.NotFound:
