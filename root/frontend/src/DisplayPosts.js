@@ -6,7 +6,9 @@ function DisplayPosts() {
   return (
     <div>
       <h1>{subredditName} posts</h1>
-      {/*  code here  */}
+      {/*  code here
+        Subreddits aus Reddit-API abrufen und anzeigen fehlt, ich weiß nicht mehr wessen Aufgabe das war.
+        */}
     </div>
   );
 }
