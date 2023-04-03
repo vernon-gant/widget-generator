@@ -131,7 +131,7 @@ const renderVideo = (postData) => {
 const renderMedia = (postData) => {
     if (postData.images.length > 0) {
         return renderImages(postData);
-    } else if (postData.video) {
+    } else if (postData.video.length > 0) {
         return renderVideo(postData);
     } else {
         return '';
