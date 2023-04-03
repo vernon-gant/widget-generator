@@ -1,4 +1,4 @@
-import {Container, Row, Col, Card} from 'react-bootstrap';
+/*import {Container, Row, Col, Card} from 'react-bootstrap';
 
 const Dashboard = () => {
     return (
@@ -7,7 +7,7 @@ const Dashboard = () => {
                 <Col>
                     <Card>
                         <Card.Body>
-                            <Card.Title className={"text-center"}>Dashboard with react-bootstrap</Card.Title>
+                            <Card.Title className={"text-center"}>Dashboard with DESPACITOOOO react-bootstrap</Card.Title>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -17,3 +17,5 @@ const Dashboard = () => {
 }
 
 export default Dashboard;
+
+*/
