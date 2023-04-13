@@ -70,6 +70,8 @@ def get_reddit_posts(subreddit: str, limit: int = 10) -> List[Post]:
                 id=submission.id,
                 video=get_video_from_submission(submission)
             )._asdict())
+        # Sort by date
+        results.sort(key=lambda x: x["date"], reverse=True)
         return results
     except prawcore.exceptions.NotFound:
         raise RedditNotFoundError(f"Subreddit {subreddit} not found")
