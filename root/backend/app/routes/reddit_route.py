@@ -1,6 +1,6 @@
-from root.backend.app.parsers.reddit_parser import get_reddit_posts
+from ..parsers.reddit_parser import get_reddit_posts
 from flask import Blueprint, jsonify, request
-from root.backend.app.parsers.reddit_parser import RedditAPIError, RedditNotFoundError
+from ..parsers.reddit_parser import RedditAPIError, RedditNotFoundError
 
 reddit_route = Blueprint('reddit_route', __name__)
 

@@ -6,7 +6,7 @@ import praw
 import prawcore
 from dotenv import load_dotenv
 
-from root.backend.app.utils import Post
+from ..utils import Post
 
 load_dotenv()
 
@@ -29,6 +29,18 @@ reddit = praw.Reddit(
 def is_image_submission(submission) -> bool:
     image_domains = ['i.redd.it', 'imgur.com']
     return any(domain in submission.url for domain in image_domains)
+
+
+def is_video_submission(submission) -> bool:
+    video_domains = ['v.redd.it']
+    return any(domain in submission.url for domain in video_domains)
+
+
+def get_video_from_submission(submission) -> list:
+    if is_video_submission(submission):
+        return [submission.secure_media["reddit_video"]["fallback_url"]]
+    else:
+        return []
 
 
 def get_image_from_submission(submission) -> list:
@@ -55,7 +67,11 @@ def get_reddit_posts(subreddit: str, limit: int = 10) -> List[Post]:
                 comments=submission.num_comments,
                 url=submission.permalink,
                 date=datetime.fromtimestamp(submission.created_utc),
+                id=submission.id,
+                video=get_video_from_submission(submission)
             )._asdict())
+        # Sort by date
+        results.sort(key=lambda x: x["date"], reverse=True)
         return results
     except prawcore.exceptions.NotFound:
         raise RedditNotFoundError(f"Subreddit {subreddit} not found")

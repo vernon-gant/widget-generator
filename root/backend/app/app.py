@@ -1,6 +1,6 @@
 from flask import Flask
 
-from root.backend.app.routes.reddit_route import reddit_route
+from .routes.reddit_route import reddit_route
 
 
 def create_app() -> Flask:
