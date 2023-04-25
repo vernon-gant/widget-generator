@@ -33,6 +33,7 @@ const SearchBox = () => {
            <Form inline>
               <FormControl type="text" placeholder="Enter URL" className="mr-sm-4" /><br /> <br />
               <Button variant="outline-info">Generate</Button>
+
             </Form><br />
     </SearchContainer>
 
