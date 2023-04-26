@@ -129,9 +129,10 @@ const renderVideo = (postData) => {
 }
 
 const renderMedia = (postData) => {
-    if (postData.images.length > 0) {
+    // Check if images is set
+    if (postData.images && postData.images.length > 0) {
         return renderImages(postData);
-    } else if (postData.video.length > 0) {
+    } else if (postData.video && postData.video.length > 0) {
         return renderVideo(postData);
     } else {
         return '';
