@@ -6,17 +6,10 @@ import praw
 import prawcore
 from dotenv import load_dotenv
 
-from ..utils import Post
+from .exceptions import RedditNotFoundError, RedditAPIError
+from ..utils import PostResource
 
 load_dotenv()
-
-
-class RedditAPIError(Exception):
-    pass
-
-
-class RedditNotFoundError(Exception):
-    pass
 
 
 reddit = praw.Reddit(
@@ -52,12 +45,12 @@ def get_image_from_submission(submission) -> list:
         return []
 
 
-def get_reddit_posts(subreddit: str, limit: int = 10) -> List[Post]:
+def get_reddit_posts(subreddit: str, limit: int = 10) -> List[PostResource]:
     results = []
     # Add limit submissions to the list using reddit
     try:
         for submission in reddit.subreddit(subreddit).hot(limit=limit):
-            results.append(Post(
+            results.append(PostResource(
                 title=submission.title,
                 content=submission.selftext,
                 author=submission.author.name,
