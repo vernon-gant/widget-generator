@@ -98,10 +98,7 @@ def get_reddit_posts(subreddit: str, limit: int = 10) -> List[PostResource]:
         results.sort(key=lambda x: x["date"], reverse=True)
         app.logger.info(f"Successfully fetched {len(results)} posts from {subreddit}")
         return results
-    except prawcore.exceptions.NotFound:
-        app.logger.error(f"Subreddit {subreddit} not found")
-        raise RedditNotFoundError(f"Subreddit {subreddit} not found")
-    except prawcore.exceptions.Redirect:
+    except prawcore.exceptions.NotFound | prawcore.exceptions.Redirect:
         app.logger.error(f"Subreddit {subreddit} not found")
         raise RedditNotFoundError(f"Subreddit {subreddit} not found")
     except Exception as e:
