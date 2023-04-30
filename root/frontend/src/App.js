@@ -4,8 +4,9 @@ import { Navigation } from './Navba';
 import SearchBox from "./SearchBox";
 import  WidgetList from "./FrequentlyUsedWidgets";
 import DisplayPosts from "./DisplayPosts";
-import backgroundImage from '../img/widget2.png';
+import backgroundImage from './img/widget2.png';
 import { motion} from "framer-motion";
+import Posts from './Posts';
 
 
 
@@ -41,16 +42,19 @@ function App() {
 
 
                 <SearchBox />
+
               </div>
 
               <WidgetList />
+               <Posts/>
             </>
           } />
 
-        <Route path="/posts/:subredditName" element={<DisplayPosts />} />
+          <Route path="/posts" component={DisplayPosts} />
 
       </Routes>
     </BrowserRouter>
+
   );
 }
 
