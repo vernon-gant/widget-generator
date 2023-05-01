@@ -14,7 +14,7 @@ function PostTypeSelect(props) {
         <option value="top">Top</option>
         <option value="random">Random</option>
         <option value="rising">Rising</option>
-        <option value="controversial">Controversial</option>
+        <option value="gaming">Gaming</option>
       </select>
     </div>
   );
