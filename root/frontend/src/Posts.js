@@ -17,7 +17,9 @@ function Posts() {
 
     useEffect(() => {
 
-        fetch('http://127.0.0.1:5000/reddit?subreddit=LevusWorkstation&limit=10')
+        fetch('http://127.0.0.1:3000/reddit?subreddit=LevusWorkstation&limit=10',{ // 3000: (the default port for React)
+            mode: 'cors',
+        })
             .then(response => response.json())
             .then(data => setPosts(data.data))
             .catch(error => console.error(error));
