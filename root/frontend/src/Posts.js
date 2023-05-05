@@ -16,17 +16,12 @@ function Posts() {
     };
 
     useEffect(() => {
-// makes cross origin fetching possible
-//const proxy = "https://cors-anywhere.herokuapp.com/";
-fetch('https://www.reddit.com/r/javascript/' + postType + '.json?limit=' + numPosts)
+
+        fetch('http://127.0.0.1:5000/reddit?subreddit=LevusWorkstation&limit=10')
             .then(response => response.json())
-            .then(data => setPosts(data.data.children))
+            .then(data => setPosts(data.data))
             .catch(error => console.error(error));
     }, [postType, numPosts]);
-/*console.log(fetch("https://www.reddit.com/r/javascript/${postType}.json?limit=${numPosts}")
-            .then(response => response.json())
-            .then(data => setPosts(data.data.children)))*/
-// Styling mit Bootstrap-Klassen
     return (
         <div className="container">
             <PostTypeSelect postType={postType} onPostTypeChange={handlePostTypeChange}/>
@@ -37,22 +32,12 @@ fetch('https://www.reddit.com/r/javascript/' + postType + '.json?limit=' + numPo
             </div>
             <div className="row">
                 {posts.map(post => (
-                    <div key={post.data.id} className="col-md-6 mb-4">
+                    <div key={post.id} className="col-md-6 mb-4">
                         <div className="card">
                             <div className="card-header">
-                                <a href={"https://www.reddit.com"+post.data.permalink}
-                                   className="card-title">{post.data.title}</a>
-                                <div className="card-subtitle">{post.data.author}</div>
-                            </div>
-                            <div className="card-body">
-                                {post.data.url.includes('.jpg') || post.data.url.includes('.png') ? (
-                                    <img src={post.data.url} alt={post.data.title} className="card-img-top"/>
-                                ) : null}
-                                <p className="card-text">{(post.data.selftext)}</p>
-                            </div>
-                            <div className="card-footer">
-                                <div className="card-text">{post.data.score} points</div>
-                                <div className="card-text">{post.data.num_comments} comments</div>
+                                <a href={"https://www.reddit.com" + post.url}
+                                   className="card-title">{post.title}</a>
+                                <div className="card-subtitle">{post.author}</div>
                             </div>
                         </div>
                     </div>
