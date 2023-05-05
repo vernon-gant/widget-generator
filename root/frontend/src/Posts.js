@@ -16,14 +16,18 @@ function Posts() {
     };
 
     useEffect(() => {
-
-        fetch('http://127.0.0.1:3000/reddit?subreddit=LevusWorkstation&limit=10',{ // 3000: (the default port for React)
-            mode: 'cors',
+        fetch('http://127.0.0.1:5000/reddit?subreddit=LevusWorkstation&limit=5', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         })
             .then(response => response.json())
-            .then(data => setPosts(data.data))
+            .then(data => setPosts(data.posts))
             .catch(error => console.error(error));
     }, [postType, numPosts]);
+
+
     return (
         <div className="container">
             <PostTypeSelect postType={postType} onPostTypeChange={handlePostTypeChange}/>
