@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Navigation } from './Navba';
-import SearchBox from "./SearchBox";
-import  WidgetList from "./FrequentlyUsedWidgets";
-import DisplayPosts from "./DisplayPosts";
-import backgroundImage from '../img/widget2.png';
+import { Navigation } from './home/Navba';
+import SearchBox from "./home/SearchBox";
+import  WidgetList from "./home/FrequentlyUsedWidgets";
+import DisplayPosts from "./home/DisplayPosts";
+import backgroundImage from './img/widget2.png';
 import { motion} from "framer-motion";
 
 
