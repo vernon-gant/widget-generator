@@ -32,18 +32,38 @@ function Posts() {
         <div className="container">
             <PostTypeSelect postType={postType} onPostTypeChange={handlePostTypeChange}/>
             <div className="mb-3">
-                <label htmlFor="numPosts" className="form-label">Anzahl der Beiträge:</label>
-                <input type="number" id="numPosts" name="numPosts" value={numPosts} min="1" max="100"
-                       onChange={handleNumPostsChange} className="form-control"/>
+                <label htmlFor="numPosts" className="form-label">
+                    Anzahl der Beiträge:
+                </label>
+                <input
+                    type="number"
+                    id="numPosts"
+                    name="numPosts"
+                    value={numPosts}
+                    min="1"
+                    max="100"
+                    onChange={handleNumPostsChange}
+                    className="form-control"
+                />
             </div>
             <div className="row">
                 {posts.map(post => (
                     <div key={post.id} className="col-md-6 mb-4">
                         <div className="card">
-                            <div className="card-header">
-                                <a href={"https://www.reddit.com" + post.url}
-                                   className="card-title">{post.title}</a>
+                            {post.images && post.images.length > 0 && (
+                                <img src={post.images[0]} alt="Post Image" className="card-img-top"/>
+                            )}
+
+                            <div className="card-body">
+                                <h5 className="card-title">{post.title}</h5>
+                                <a href="card-url">{post.url}</a>
+                                {(!post.images || post.images.length === 0) && !post.video && (
+                                    <p className="card-text">{post.content}</p>
+                                )}
                                 <div className="card-subtitle">{post.author}</div>
+                                <div className="card-comments">{post.comments}</div>
+                                <div className="card-likes btn-success">{post.likes}</div>
+                                <div className="card-date">{post.date}</div>
                             </div>
                         </div>
                     </div>
@@ -51,49 +71,6 @@ function Posts() {
             </div>
         </div>
     );
-return (
-    <div className="container">
-      <PostTypeSelect postType={postType} onPostTypeChange={handlePostTypeChange} />
-      <div className="mb-3">
-        <label htmlFor="numPosts" className="form-label">
-          Anzahl der Beiträge:
-        </label>
-        <input
-          type="number"
-          id="numPosts"
-          name="numPosts"
-          value={numPosts}
-          min="1"
-          max="100"
-          onChange={handleNumPostsChange}
-          className="form-control"
-        />
-      </div>
-      <div className="row">
-        {posts.map(post => (
-          <div key={post.id} className="col-md-6 mb-4">
-            <div className="card">
-              {post.images && post.images.length > 0 && (
-                <img src={post.images[0]} alt="Post Image" className="card-img-top" />
-              )}
-
-              <div className="card-body">
-                <h5 className="card-title">{post.title}</h5>
-                  <a href="card-url">{post.url}</a>
-                {(!post.images || post.images.length === 0) && !post.video && (
-                  <p className="card-text">{post.content}</p>
-                )}
-                <div className="card-subtitle">{post.author}</div>
-                <div className="card-comments">{post.comments}</div>
-                <div className="card-likes btn-success">{post.likes}</div>
-                <div className="card-date">{post.date}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 }
 
 export default Posts;
