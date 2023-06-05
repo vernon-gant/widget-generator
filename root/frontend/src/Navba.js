@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Navigation = () => {
@@ -17,35 +17,29 @@ const Navigation = () => {
         fontSize: '20px',
       }}
     >
-      <Container>
-        <Row>
-          <Col xs={6}>
-            <Link to="/" style={{ textDecoration: 'none' }}>
-              <Navbar.Brand
-                style={{
-                  fontSize: '26px',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  fontFamily: 'Arial, Helvetica, sans-serif',
-                }}
-              >
-                <b>Widget Generator</b>&nbsp;&nbsp;
-              </Navbar.Brand>
-            </Link>
-          </Col>
-          <Col xs={6} className="text-right">
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          </Col>
-        </Row>
-      </Container>
+      <Navbar.Brand
+        style={{
+          fontSize: '26px',
+          color: 'white',
+          fontWeight: 'bold',
+          fontFamily: 'Arial, Helvetica, sans-serif',
+          marginLeft: '20px',
+        }}
+      >
+        <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+          <b>Widget Generator</b>
+        </Link>
+      </Navbar.Brand>
 
-      <Navbar.Collapse id="basic-navbar-nav">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+      <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
         <Nav className="ml-auto">
-          <Nav.Link as={Link} to="/about">
+          <Nav.Link as={Link} to="/about" className="ml-auto">
             About
           </Nav.Link>
-          <Nav.Link as={Link} to="/impress">
-              Impressum
+          <Nav.Link as={Link} to="/impress" className="ml-auto">
+            Impressum
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
