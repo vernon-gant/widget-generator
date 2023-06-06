@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import PostTypeSelect from './PostTypeSelect';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap importieren
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faCalendar, faComments, faThumbsUp, faUser} from '@fortawesome/free-solid-svg-icons'
+
 
 function Posts() {
     const [posts, setPosts] = useState([]);
@@ -16,7 +19,7 @@ function Posts() {
     };
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/reddit?subreddit=LevusWorkstation&limit=5', {
+        fetch('http://127.0.0.1:5000/reddit?subreddit=LevusWorkstation&limit=15', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,30 +49,41 @@ function Posts() {
                     className="form-control"
                 />
             </div>
-            <div className="row">
-                {posts.map(post => (
-                    <div key={post.id} className="col-md-6 mb-4">
-                        <div className="card">
-                            {post.images && post.images.length > 0 && (
-                                <img src={post.images[0]} alt="Post Image" className="card-img-top"/>
-                            )}
+           <div className="row">
+      {posts.map(post => (
+        <div key={post.id} className="col-md-6 mb-4">
+                  <div className="card">
+                    {post.images && post.images.length > 0 && (
+                      <img
+                        src={post.images[0]}
+                        alt="Post Image"
+                        className={`card-img-top ${post.video ? 'img-fluid' : 'img-thumbnail'}`}
+                      />
+                    )}
+                    <div className="card-body">
+                      <h5 className="card-title" style={{
+                          backgroundImage: 'linear-gradient(to right, #9325cf, yellow)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          fontWeight: 'extra bold',
+                          textDecoration: 'underline'  }}>
+                          <b>{post.title}</b>
+                      </h5>
 
-                            <div className="card-body">
-                                <h5 className="card-title">{post.title}</h5>
-                                <a href="card-url">{post.url}</a>
-                                {(!post.images || post.images.length === 0) && !post.video && (
-                                    <p className="card-text">{post.content}</p>
-                                )}
-                                <div className="card-subtitle">{post.author}</div>
-                                <div className="card-comments">{post.comments}</div>
-                                <div className="card-likes btn-success">{post.likes}</div>
-                                <div className="card-date">{post.date}</div>
-                            </div>
-                        </div>
+                      <a href="card-url" >{post.url}</a>
+                      {(!post.images || post.images.length === 0) && !post.video && (
+                         <p className="card-text">{post.content}</p>
+                       )}
+                        <br /><br /> <div className="card-subtitle small"><b><FontAwesomeIcon icon={faUser} style={{ color: '#6a208a' }} /> </b>{post.author}</div>
+                        <div className="card-comments small"><b><FontAwesomeIcon icon={faComments} /></b> {post.comments}</div>
+                        <div className="card-likes btn-success small"><b><FontAwesomeIcon icon={faThumbsUp} style={{color:'#20478a'}}/></b> {post.likes}</div>
+                      <div className="card-date small"><FontAwesomeIcon icon={faCalendar} /> Date: {post.date}</div>
                     </div>
-                ))}
+                  </div>
+                </div>
+              ))}
             </div>
-        </div>
+      </div>
     );
 }
 
