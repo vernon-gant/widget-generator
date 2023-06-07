@@ -52,7 +52,9 @@ function App() {
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/impress" element={<ImpressPage />} />
         <Route path="/posts" component={DisplayPosts} />
+
       </Routes>
+
     </BrowserRouter>
   );
 }
