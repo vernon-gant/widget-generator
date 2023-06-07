@@ -6,7 +6,7 @@ const AboutUsPage = () => {
     <div>
       <Navigation />
 
-      <br /> <br />
+      <br /> <br /><br /> <br />
       <div style={{
           textAlign: 'center',
           margin: '0 auto',
@@ -50,7 +50,7 @@ const AboutUsPage = () => {
           generator helpful and enjoyable to use. <br /> If you have any feedback or questions, please
           don't hesitate to contact us.
         </p>
-      </div>
+      </div> <br />
     </div>
   );
 };
