@@ -1,16 +1,17 @@
-import { useParams } from 'react-router-dom';
+import {useLocation, useParams} from 'react-router-dom';
+import Posts from "./Posts";
 
 function DisplayPosts() {
-  const { subredditName } = useParams();
+    console.log("DisplayPosts rendered")
+    let location = useLocation();
+    let params = new URLSearchParams(location.search);
+    let subredditName = params.get('subreddit');
 
-  return (
-    <div>
-      <h1>{subredditName} posts</h1>
-      {/*  code here
-        Subreddits aus Reddit-API abrufen und anzeigen fehlt, ich weiß nicht mehr wessen Aufgabe das war.
-        */}
-    </div>
-  );
+    return (
+        <div>
+            <Posts subreddit={subredditName}/>
+        </div>
+    );
 }
 
 export default DisplayPosts;

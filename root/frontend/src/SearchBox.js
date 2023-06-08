@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Container, Form, FormControl} from "react-bootstrap";
+import {Button, Form, FormControl} from "react-bootstrap";
 import {motion} from "framer-motion";
 import styled from "styled-components";
 
@@ -8,7 +8,7 @@ const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 50px;
-  
+
 `;
 
 const SearchInput = styled.input`
@@ -26,18 +26,16 @@ const SearchButton = styled(motion.button)`
   font-weight: bold;
 `;
 
-
 const SearchBox = () => {
-  return (
-     <SearchContainer>
-           <Form inline>
-              <FormControl type="text" placeholder="Enter URL" className="mr-sm-4" /><br /> <br />
-              <Button variant="outline-info">Generate</Button>
+    return (
+        <SearchContainer>
+            <Form inline>
+                <FormControl type="text" placeholder="Enter subreddit" className="mr-sm-4"/><br/> <br/>
+                <Button variant="outline-info">Generate</Button>
+            </Form><br/>
+        </SearchContainer>
 
-            </Form><br />
-    </SearchContainer>
-
-  );
+    );
 };
 
 export default SearchBox;

@@ -9,6 +9,10 @@ reddit_route = Blueprint('reddit_route', __name__)
 @cross_origin()  # This will enable CORS for a specific route
 @reddit_route.route("/reddit")
 def reddit():
+    if request.method == 'OPTIONS':
+        # This is a preflight request. Respond accordingly.
+        return {}
+
     limit = int(request.args.get("limit", 10))
     subreddit = request.args.get("subreddit", "all")
 

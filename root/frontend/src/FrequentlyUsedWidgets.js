@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Container } from "react-bootstrap";
-import { Link, Routes, Route } from 'react-router-dom';
+import {motion} from 'framer-motion';
+import {Container} from "react-bootstrap";
+import {Link} from 'react-router-dom';
 
 const WidgetContainer = styled(motion.div)`
   display: flex;
@@ -30,47 +30,40 @@ const WidgetLink = styled(Link)`
 `;
 
 const widgets = [
-     { id: 1, title: 'Trending', link: '/trending' },
-     { id: 2, title: 'Sports', link: '/sports' },
-     { id: 3, title: 'Gaming', link: 'https://www.reddit.com/search/?q=gaming' },
-
-
+    {id: 1, title: 'Trending', link: '/reddit?subreddit=trending'},
+    {id: 2, title: 'Sports', link: '/reddit?subreddit=sports'},
+    {id: 3, title: 'Gaming', link: '/reddit?subreddit=gaming'},
 ];
 
 const widgetVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' },
-  },
+    hidden: {opacity: 0, y: 50},
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {duration: 0.5, ease: 'easeOut'},
+    },
 };
 
 const WidgetList = () => {
-  return (
-    <Container className={'mt-4'}>
-        <br /><h2 col style={{textAlign:'center'}}> <b>Frequently Used </b>  </h2>
+    return (
+        <Container className={'mt-4'}>
+            <br/><h2 col style={{textAlign: 'center'}}><b>Frequently Used </b></h2>
 
-      <WidgetContainer>
-        {widgets.map((widget) => (
-          <Widget
-            key={widget.id}
-            variants={widgetVariants}
-            initial="hidden"
-            animate="visible"
-            textAlign="center"
-          >
-            <WidgetTitle> <b><WidgetLink to={widget.link}>{widget.title}</WidgetLink></b></WidgetTitle>
-          </Widget>
-        ))}
-      </WidgetContainer>
-
-      <Routes>
-            <Route path="/sports" element={<h1>Sports Page</h1>} />
-            <Route path="/trending" element={<h1>Trending Page</h1>} />
-      </Routes>
-    </Container>
-  );
+            <WidgetContainer>
+                {widgets.map((widget) => (
+                    <Widget
+                        key={widget.id}
+                        variants={widgetVariants}
+                        initial="hidden"
+                        animate="visible"
+                        textAlign="center"
+                    >
+                        <WidgetTitle> <b><WidgetLink to={widget.link}>{widget.title}</WidgetLink></b></WidgetTitle>
+                    </Widget>
+                ))}
+            </WidgetContainer>
+        </Container>
+    );
 };
 
 export default WidgetList;
