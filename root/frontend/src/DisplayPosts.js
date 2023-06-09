@@ -12,14 +12,14 @@ function DisplayPosts() {
 
     return (
         <div>
-          <Navigation />
-            <br /> <br /> <br /> <br />
-            <div style={{ textAlign: 'center' }}>
+            <Navigation/>
+            <br/> <br/> <br/> <br/>
+            <div style={{textAlign: 'center'}}>
                 <h1
                     style={{
                         textTransform: 'uppercase',
                         color: '#3c2a64',
-                        textShadow:'0 0 3px #f069d9',
+                        textShadow: '0 0 3px #f069d9',
                         textDecoration: 'underline dashed #f069d9',
                         fontFamily: 'sans-serif',
                         fontSize: '40px',
@@ -27,7 +27,8 @@ function DisplayPosts() {
                     }}>
                     <b>{subredditName}</b>
                 </h1>
-            </div> <br /> <br />
+            </div>
+            <br/> <br/>
             <div>
                 <Posts subreddit={subredditName}/>
             </div>

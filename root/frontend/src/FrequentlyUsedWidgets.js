@@ -30,7 +30,7 @@ const WidgetLink = styled(Link)`
 `;
 
 const widgets = [
-    {id: 1, title: 'Trending', link: '/reddit?subreddit=trending'},
+    {id: 1, title: 'NBA', link: '/reddit?subreddit=nba'},
     {id: 2, title: 'Sports', link: '/reddit?subreddit=sports'},
     {id: 3, title: 'Gaming', link: '/reddit?subreddit=gaming'},
 ];

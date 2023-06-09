@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Form, FormControl} from "react-bootstrap";
 import {motion} from "framer-motion";
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 
 const SearchContainer = styled.div`
@@ -27,11 +28,23 @@ const SearchButton = styled(motion.button)`
 `;
 
 const SearchBox = () => {
+    const [subreddit, setSubreddit] = useState(''); // Create state for subreddit
+    const handleInputChange = (event) => setSubreddit(event.target.value);
+
     return (
         <SearchContainer>
             <Form inline>
-                <FormControl type="text" placeholder="Enter subreddit" className="mr-sm-4"/><br/> <br/>
-                <Button variant="outline-info">Generate</Button>
+                <FormControl
+                    id="search"
+                    type="text"
+                    placeholder="Enter subreddit"
+                    className="mr-sm-4"
+                    value={subreddit} // Set value of the form control
+                    onChange={handleInputChange} // Set function to handle form input changes
+                /><br/> <br/>
+                <Link to={`/reddit?subreddit=${subreddit}`}>
+                    <Button variant="outline-info">Generate</Button>
+                </Link>
             </Form><br/>
         </SearchContainer>
 
