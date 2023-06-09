@@ -37,10 +37,16 @@ const SearchBox = () => {
                 <FormControl
                     id="search"
                     type="text"
-                    placeholder="Enter subreddit"
+                    placeholder=" Enter Subreddit"
                     className="mr-sm-4"
                     value={subreddit} // Set value of the form control
                     onChange={handleInputChange} // Set function to handle form input changes
+                    style={{
+                        textAlign: "center",
+                        borderRadius: "40px",
+                        width: "280px",
+                        height: "50px",
+                    }}
                 /><br/> <br/>
                 <Link to={`/reddit?subreddit=${subreddit}`}>
                     <Button variant="outline-info">Generate</Button>

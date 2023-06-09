@@ -13,7 +13,8 @@ function HomePage() {
     return (
         <>
             <Navigation/>
-            <div className="header-container" style={{
+            <div className="header-container"
+               style={{
                 background: `url(${backgroundImage}) no-repeat center center fixed`,
                 backgroundSize: "cover",
                 padding: "50px 0",
@@ -40,6 +41,7 @@ function HomePage() {
 
             </div>
             <WidgetList/>
+            <br /> <br />
         </>
     );
 }
