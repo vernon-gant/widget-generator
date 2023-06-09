@@ -16,15 +16,16 @@ const AboutUsPage = () => {
           borderColor: '#5b4db7',
           borderRadius: '10px',
           boxShadow: '0 10px 20px 0 rgba(232,181,232,1)',
-         borderStyle: 'solid',
+          borderStyle: 'solid',
         }}
       >
-        <h1 style={{
+        <h1
+         style={{
           fontSize: '30px',
           fontWeight: 'bold',
           marginBottom: '20px',
           textDecoration:'underline black',
-            color: '#701d8d',
+          color: '#701d8d',
         }}>
 
           About Us
