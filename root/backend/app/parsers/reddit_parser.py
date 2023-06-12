@@ -1,14 +1,15 @@
 import os
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
 import praw
 import prawcore
 from dotenv import load_dotenv
+from flask import current_app as app
 from praw.reddit import Submission
 from typing import List
 
-from .exceptions import RedditNotFoundError, RedditAPIError
-from flask import current_app as app
+from .exceptions import SubredditNotFoundError, RedditAPIError, PrivateSubredditError
 from ..utils import PostResource
 
 load_dotenv()
@@ -17,6 +18,7 @@ reddit = praw.Reddit(
     client_id=os.environ.get("REDDIT_CLIENT_ID"),
     client_secret=os.environ.get("REDDIT_CLIENT_SECRET"),
     user_agent="testscript by u/fakebot3",
+    ratelimit_seconds=1,
 )
 
 
@@ -74,33 +76,42 @@ def get_image_from_submission(submission: Submission) -> list:
         return []
 
 
-def get_reddit_posts(subreddit: str, limit: int = 10) -> List[PostResource]:
-    results = []
-    # Add limit submissions to the list using reddit
+def create_post_resource(submission):
+    return PostResource(
+        title=submission.title,
+        content=submission.selftext if not is_url_submission(submission) else submission.url,
+        author=submission.author.name if submission.author else "Unknown",
+        # If there are no images in preview, return an empty list
+        images=get_image_from_submission(submission),
+        likes=submission.score,
+        comments=submission.num_comments,
+        url=submission.permalink,
+        date=datetime.fromtimestamp(submission.created_utc),
+        id=submission.id,
+        video=get_video_from_submission(submission)
+    )._asdict()
+
+
+def get_reddit_posts(subreddit: str, limit: int) -> List[PostResource]:
     try:
         posts = reddit.subreddit(subreddit).hot(limit=limit)
-        for submission in posts:
-            results.append(PostResource(
-                title=submission.title,
-                content=submission.selftext if not is_url_submission(submission) else submission.url,
-                author=submission.author.name,
-                # If there are no images in preview, return an empty list
-                images=get_image_from_submission(submission),
-                likes=submission.score,
-                comments=submission.num_comments,
-                url=submission.permalink,
-                date=datetime.fromtimestamp(submission.created_utc),
-                id=submission.id,
-                video=get_video_from_submission(submission)
-            )._asdict())
-            app.logger.info(f"Successfully processed post {submission.id} - {submission.title} from {subreddit}")
+
+        with ThreadPoolExecutor() as executor:
+            results = list(executor.map(create_post_resource, posts))
+
         # Sort by date
         results.sort(key=lambda x: x["date"], reverse=True)
         app.logger.info(f"Successfully fetched {len(results)} posts from {subreddit}")
         return results
-    except prawcore.exceptions.NotFound | prawcore.exceptions.Redirect:
-        app.logger.error(f"Subreddit {subreddit} not found")
-        raise RedditNotFoundError(f"Subreddit {subreddit} not found")
+    except prawcore.exceptions.NotFound as e:
+        app.logger.info(f"Subreddit {subreddit} not found")
+        raise SubredditNotFoundError(f"Subreddit {subreddit} not found")
+    except prawcore.exceptions.Redirect as e:
+        app.logger.info(f"Subreddit {subreddit} not found")
+        raise SubredditNotFoundError(f"Subreddit {subreddit} not found")
+    except prawcore.exceptions.Forbidden as e:
+        app.logger.info(f"Subreddit {subreddit} is private")
+        raise PrivateSubredditError(f"Subreddit {subreddit} is private")
     except Exception as e:
         app.logger.error(f"Failed to fetch Reddit posts from {subreddit}: {e}")
-        raise RedditAPIError(f"Error fetching Reddit posts from {subreddit}: {e}")
+        raise RedditAPIError(f"Error fetching Reddit posts from {subreddit}")

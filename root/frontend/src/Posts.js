@@ -1,45 +1,73 @@
-import React, {useEffect, useState} from 'react';
-import PostTypeSelect from './PostTypeSelect';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap importieren
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCalendarAlt, faComments, faThumbsUp, faUser} from '@fortawesome/free-solid-svg-icons';
+import Loader from "./Loader";
+import {formatDate} from './Utils';
 
-function Posts() {
-    const [posts, setPosts] = useState([]);
-    const [postType, setPostType] = useState('hot');
-    const [numPosts, setNumPosts] = useState(10);
+function Posts({posts = [], loading}) {
 
-    const handlePostTypeChange = newPostType => {
-        setPostType(newPostType);
-    };
+    if (loading) return <Loader/>;
 
-    const handleNumPostsChange = event => {
-        setNumPosts(event.target.value);
-    };
-
-    useEffect(() => {
-
-        fetch('http://127.0.0.1:3000/reddit?subreddit=LevusWorkstation&limit=10',{ // 3000: (the default port for React)
-            mode: 'cors',
-        })
-            .then(response => response.json())
-            .then(data => setPosts(data.data))
-            .catch(error => console.error(error));
-    }, [postType, numPosts]);
     return (
         <div className="container">
-            <PostTypeSelect postType={postType} onPostTypeChange={handlePostTypeChange}/>
-            <div className="mb-3">
-                <label htmlFor="numPosts" className="form-label">Anzahl der Beiträge:</label>
-                <input type="number" id="numPosts" name="numPosts" value={numPosts} min="1" max="100"
-                       onChange={handleNumPostsChange} className="form-control"/>
-            </div>
             <div className="row">
                 {posts.map(post => (
                     <div key={post.id} className="col-md-6 mb-4">
                         <div className="card">
-                            <div className="card-header">
-                                <a href={"https://www.reddit.com" + post.url}
-                                   className="card-title">{post.title}</a>
-                                <div className="card-subtitle">{post.author}</div>
+                            <div className="card-body">
+                                <h5 className="card-title">
+                                    <a
+                                        href={`https://www.reddit.com${post.url}`}
+                                        style={{
+                                            color: 'black',
+                                            textDecoration: 'underline',
+                                            backgroundImage: 'linear-gradient(to right, #20478a, #9325cf)',
+                                            WebkitBackgroundClip: 'text',
+                                            WebkitTextFillColor: 'transparent',
+                                            fontWeight: 'extra bold',
+                                        }}
+                                    >
+                                        <b>{post.title}</b>
+                                    </a>
+                                </h5>
+                                <br/>
+                                {post.images && post.images.length > 0 && (
+                                    <div className="mb-3 text-center">
+                                        <img
+                                            src={post.images[0]}
+                                            alt="Post Image"
+                                            className="img-fluid mx-auto d-block"
+                                            style={{maxHeight: '350px', objectFit: 'cover'}}
+                                        />
+                                    </div>
+                                )}
+
+                                {(!post.images || post.images.length === 0) && !post.video && (
+                                    <p className="card-text">{post.content}</p>
+                                )}
+
+                                <div className="card-subtitle small">
+                                    <b>
+                                        <FontAwesomeIcon icon={faUser} style={{color: '#5b4db7'}}/>{' '}
+                                    </b>
+                                    {post.author}
+                                </div>
+                                <div className="card-comments small">
+                                    <b>
+                                        <FontAwesomeIcon icon={faComments}/>
+                                    </b>{' '}
+                                    {post.comments}
+                                </div>
+                                <div className="card-likes btn-success small">
+                                    <b>
+                                        <FontAwesomeIcon icon={faThumbsUp} style={{color: '#20478a'}}/>
+                                    </b>{' '}
+                                    {post.likes}
+                                </div>
+                                <div className="card-date small">
+                                    <FontAwesomeIcon icon={faCalendarAlt}/> {formatDate(post.date)}
+                                </div>
                             </div>
                         </div>
                     </div>

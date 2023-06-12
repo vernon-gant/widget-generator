@@ -1,6 +1,7 @@
 import logging
 
 from flask import Flask
+from flask_cors import CORS
 
 from .routes.reddit_route import reddit_route
 
@@ -16,6 +17,9 @@ def configure_logger(flask_app: Flask) -> None:
 def create_app() -> Flask:
     flask_app = Flask(__name__)
     configure_logger(flask_app)
+
+    CORS(flask_app, origins='http://localhost:3000')
+
     flask_app.register_blueprint(reddit_route)
 
     return flask_app

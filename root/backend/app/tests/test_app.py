@@ -2,7 +2,7 @@ import unittest
 import json
 from unittest.mock import patch
 from ..app import create_app
-from ..parsers.exceptions import RedditAPIError, RedditNotFoundError
+from ..parsers.exceptions import RedditAPIError, SubredditNotFoundError
 
 
 class MockSubmission:
@@ -56,7 +56,7 @@ class TestApp(unittest.TestCase):
 
     @patch("app.routes.reddit_route.get_reddit_posts")
     def test_reddit_route_error_404(self, mock_get_reddit_posts):
-        mock_get_reddit_posts.side_effect = RedditNotFoundError("Subreddit not found")
+        mock_get_reddit_posts.side_effect = SubredditNotFoundError("Subreddit not found")
 
         response = self.client.get("/reddit?subreddit=test&limit=5")
 
