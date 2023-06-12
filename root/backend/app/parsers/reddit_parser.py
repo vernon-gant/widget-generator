@@ -4,11 +4,11 @@ from datetime import datetime
 import praw
 import prawcore
 from dotenv import load_dotenv
+from flask import current_app as app
 from praw.reddit import Submission
 from typing import List
 
 from .exceptions import RedditNotFoundError, RedditAPIError
-from flask import current_app as app
 from ..utils import PostResource
 
 load_dotenv()
@@ -83,7 +83,7 @@ def get_reddit_posts(subreddit: str, limit: int = 10) -> List[PostResource]:
             results.append(PostResource(
                 title=submission.title,
                 content=submission.selftext if not is_url_submission(submission) else submission.url,
-                author=submission.author.name,
+                author=submission.author.name if submission.author else "Unknown",
                 # If there are no images in preview, return an empty list
                 images=get_image_from_submission(submission),
                 likes=submission.score,
@@ -98,7 +98,10 @@ def get_reddit_posts(subreddit: str, limit: int = 10) -> List[PostResource]:
         results.sort(key=lambda x: x["date"], reverse=True)
         app.logger.info(f"Successfully fetched {len(results)} posts from {subreddit}")
         return results
-    except (prawcore.exceptions.NotFound, prawcore.exceptions.Redirect):
+    except prawcore.exceptions.NotFound as e:
+        app.logger.error(f"Subreddit {subreddit} not found")
+        raise RedditNotFoundError(f"Subreddit {subreddit} not found")
+    except prawcore.exceptions.Redirect as e:
         app.logger.error(f"Subreddit {subreddit} not found")
         raise RedditNotFoundError(f"Subreddit {subreddit} not found")
     except Exception as e:
