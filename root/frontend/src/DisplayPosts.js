@@ -1,25 +1,30 @@
-import {Link, useLocation, useParams} from 'react-router-dom';
 import Posts from "./Posts";
 import Navigation from "./Navba";
 import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faLongArrowLeft} from "@fortawesome/free-solid-svg-icons";
 import './DisplayPosts.css';
+import FetchPosts from "./FetchPosts";
+import {useSubreddit} from "./Utils";
+import Loader from "./Loader";
+import Error from "./Error";
+import BackButton from "./BackButton";
 
 
 function DisplayPosts() {
-    //console.log("DisplayPosts rendered")
-    let location = useLocation();
-    let params = new URLSearchParams(location.search);
-    let subredditName = params.get('subreddit');
+
+    const subredditName = useSubreddit();
+
+    const {posts, loading, error} = FetchPosts({subreddit: subredditName, numPosts: 10});
+
+    if (loading) return <Loader/>;
+
+    if (error) return <Error error={error}/>;
+
 
     return (
         <div>
             <Navigation/>
             <br/> <br/> <br/> <br/>
-            <Link to="/" element="{<HomePage/>}" role="button">
-                   <FontAwesomeIcon icon={faLongArrowLeft} className="back-button" />
-            </Link>
+            <BackButton/>
 
             <div style={{textAlign: 'center'}}>
                 <h1
@@ -37,7 +42,7 @@ function DisplayPosts() {
             </div>
             <br/> <br/>
             <div>
-                <Posts subreddit={subredditName}/>
+                <Posts posts={posts} loading={loading}/>
             </div>
         </div>
     );
