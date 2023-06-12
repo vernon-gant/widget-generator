@@ -9,7 +9,7 @@ from flask import current_app as app
 from praw.reddit import Submission
 from typing import List
 
-from .exceptions import RedditNotFoundError, RedditAPIError
+from .exceptions import RedditNotFoundError, RedditAPIError, PrivateSubredditError
 from ..utils import PostResource
 
 load_dotenv()
@@ -111,7 +111,7 @@ def get_reddit_posts(subreddit: str, limit: int) -> List[PostResource]:
         raise RedditNotFoundError(f"Subreddit {subreddit} not found")
     except prawcore.exceptions.Forbidden as e:
         app.logger.info(f"Subreddit {subreddit} is private")
-        raise RedditNotFoundError(f"Subreddit {subreddit} is private")
+        raise PrivateSubredditError(f"Subreddit {subreddit} is private")
     except Exception as e:
         app.logger.error(f"Failed to fetch Reddit posts from {subreddit}: {e}")
         raise RedditAPIError(f"Error fetching Reddit posts from {subreddit}")

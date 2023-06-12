@@ -4,3 +4,7 @@ class RedditAPIError(Exception):
 
 class RedditNotFoundError(Exception):
     pass
+
+
+class PrivateSubredditError(Exception):
+    pass
