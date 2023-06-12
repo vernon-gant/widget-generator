@@ -2,7 +2,7 @@ class RedditAPIError(Exception):
     pass
 
 
-class RedditNotFoundError(Exception):
+class SubredditNotFoundError(Exception):
     pass
 
 

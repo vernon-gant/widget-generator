@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_cors import cross_origin
 
-from ..parsers.reddit_parser import RedditAPIError, RedditNotFoundError, get_reddit_posts, PrivateSubredditError
+from ..parsers.reddit_parser import RedditAPIError, SubredditNotFoundError, get_reddit_posts, PrivateSubredditError
 
 reddit_route = Blueprint('reddit_route', __name__)
 
@@ -20,7 +20,7 @@ def reddit():
         return jsonify({"posts": get_reddit_posts(subreddit, limit)})
     except RedditAPIError as e:
         return jsonify({"error": str(e)}), 500
-    except RedditNotFoundError as e:
+    except SubredditNotFoundError as e:
         return jsonify({"error": str(e)}), 404
     except PrivateSubredditError as e:
         return jsonify({"error": str(e)}), 403
