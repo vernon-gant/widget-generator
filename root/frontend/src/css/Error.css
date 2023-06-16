@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,500&display=swap');
+
+:root {
+    --purple: #8a15ff;
+    --blue: #3800e7;
+    --ltblue: #15e0ff;
+    --magenta: #d000c5;
+}
+
+/*.Error-container {
+   background: linear-gradient(var(--blue), var(--purple));
+   height: 100vh;
+   font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+   font-family: 'DM Mono', monospace;
+   font-weight: 300;
+   overflow: hidden;
+   color: black;
+   text-align: center;
+ }*/
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.2em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+.main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.main:before,
+.main:after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -3;
+}
+
+.main:before {
+    right: 0;
+    bottom: -19px;
+    height: 30em;
+    width: 30em;
+    border-radius: 30em;
+    background: linear-gradient(var(--blue), var(--purple));
+    align-self: flex-end;
+    animation: gradient-fade 8s ease-in-out 3s infinite alternate;
+}
+
+.main:after {
+    --circle-unit: 10em;
+    top: 0;
+    left: 30px;
+    height: var(--circle-unit);
+    width: var(--circle-unit);
+    border-radius: var(--circle-unit);
+    background: linear-gradient(var(--blue), var(--purple));
+    animation: gradient-fade-alt 6s ease-in-out 3s infinite alternate;
+}
+
+.main__text-wrapper {
+    position: relative;
+    padding: 2em;
+}
+
+.main__text-wrapper:before,
+.main__text-wrapper:after {
+    content: '';
+    display: block;
+    position: absolute;
+}
+
+.main__text-wrapper:before {
+    --circle-unit: 13em;
+    z-index: -1;
+    top: -3em;
+    right: -3em;
+    width: var(--circle-unit);
+    height: var(--circle-unit);
+    opacity: 0.7;
+    border-radius: var(--circle-unit);
+    background: linear-gradient(var(--ltblue), var(--purple));
+    animation: rotation 7s linear infinite;
+}
+
+.main__text-wrapper:after {
+    --circle-unit: 20em;
+    z-index: -1;
+    bottom: calc(-1 * var(--circle-unit));
+    width: var(--circle-unit);
+    height: var(--circle-unit);
+    border-radius: var(--circle-unit);
+    background: linear-gradient(var(--magenta), var(--purple));
+    animation: rotation 7s linear infinite;
+}
+
+.main__title {
+    font-family: 'Leckerli One', cursive;
+    text-align: center;
+    font-size: 8em;
+
+}
+
+.arrow {
+    z-index: 1000;
+    opacity: 0.5;
+    position: absolute;
+}
+
+.arrow--top {
+    top: 0;
+    left: -5em;
+}
+
+.arrow--bottom {
+    bottom: 0;
+    right: 3em;
+}
+
+.circle {
+    transform: translate(50%, -50%) rotate(0deg);
+    transform-origin: center;
+}
+
+.circle--ltblue {
+    --circle-unit: 20em;
+    height: var(--circle-unit);
+    width: var(--circle-unit);
+    border-radius: var(--circle-unit);
+    background: linear-gradient(var(--ltblue), var(--blue));
+}
+
+.backdrop {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-color: pink;
+}
+
+.dotted-circle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.3;
+    animation: rotation 38s linear infinite;
+}
+
+/* animations */
+
+.draw-in {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 10;
+    animation: draw 15s ease-in-out alternate infinite;
+}
+
+@keyframes draw {
+    from {
+        stroke-dashoffset: 1000;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.item-to {
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    transform-origin: bottom;
+}
+
+.bounce-1 {
+    animation-name: bounce-1;
+    animation-timing-function: ease;
+}
+
+.bounce-2 {
+    animation-name: bounce-2;
+    animation-timing-function: ease;
+}
+
+.bounce-3 {
+    animation-name: bounce-3;
+    animation-timing-function: ease;
+}
+
+@keyframes bounce-1 {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(50px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce-2 {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce-3 {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* gradient fade */
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes gradient-fade {
+    from {
+        transform: translate(10%, -10%) rotate(0deg);
+    }
+    to {
+        transform: translate(50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes gradient-fade-alt {
+    from {
+        transform: translate(-20%, 20%) rotate(0deg);
+    }
+    to {
+        transform: translate(-60%, 60%) rotate(360deg);
+    }
+}
+
+
+/* CSS */
+.button-34 {
+    background: #b7a94d;
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+}
+
+
+.container-34 {
+    font-style: italic;
+    max-width: 600px;
+    text-align: center;
+    font-family: 'bold cursive';
+    color: orangered;
+}
