@@ -1,0 +1,101 @@
+
+.twelve {
+    font-family: 'Leckerli One', cursive;
+    text-decoration: none;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 160px;
+    text-align: center;
+    margin: auto;
+    white-space: nowrap;
+    padding-bottom: 13px;
+    color: #3c2a64;
+    text-shadow: 0 0 2px #b7a94d;
+    position: relative;
+    textDecorationThickness: 5px;
+}
+
+.twelve::before,
+.twelve::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 70px;
+    height: 3px;
+    background: linear-gradient(to right, #2f6270, #b7a94d);
+}
+
+.twelve::before {
+    top: 0;
+    left: -50px;
+}
+
+.twelve::after {
+    bottom: 10px;
+    right: -50px;
+}
+
+.twelve:hover::before,
+.twelve:hover::after {
+    width: 80px;
+    /* top: 87.5%;
+       transition: 0.6s ease left;*/
+}
+.back-button {
+    color: #ad5010;
+    width: 48px;
+    height: 100px;
+    fill: #580e5d;
+    transition: transform 0.3s ease, width 0.3s ease;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 999;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-button:hover {
+    opacity: 1.8;
+    transform: translateX(-17px); /* Positive Wert für Vorwärtsbewegung */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.back-button {
+    animation: fadeIn 0.8s ease;
+}
+
+
+/*
+  cursor: pointer;
+ .box-d a {line-height:125px;}
+  transition: 0.3s ease all .1s;
+ .box-d:hover .custom-underline::after {
+  top: 67.5%;
+  transition: 0.4s ease all;
+}*/
+
+
+/*.subreddit-header {
+    text-transform: uppercase;
+    color: #3c2a64;
+    text-shadow: 0 0 5px #f069d9;
+    text-decoration: #f069d9;
+    font-family:  'Leckerli One', cursive; /*'Dancing Script', cursive;*/
+/*font-size: 50px;*/
+/* box-shadow: 10px 10px 2px #f069d9;*/
+/*}*/

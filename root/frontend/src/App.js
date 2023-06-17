@@ -1,26 +1,27 @@
 import React from 'react';
-import {motion} from "framer-motion";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {motion} from "framer-motion";
 import Navigation from './Navba';
-import AboutUsPage from './About';
+import AboutUsPage from './AboutUs';
 import ImpressPage from "./Impressum";
+import backgroundImage from './img/widget2.png';
 import SearchBox from "./SearchBox";
 import WidgetList from "./FrequentlyUsedWidgets";
 import DisplayPosts from "./DisplayPosts";
-import backgroundImage from './img/widget2.png';
+
 
 function HomePage() {
     return (
         <>
             <Navigation/>
             <div className="header-container"
-               style={{
-                background: `url(${backgroundImage}) no-repeat center center fixed`,
-                backgroundSize: "cover",
-                padding: "50px 0",
-                textAlign: "center",
-                color: "white"
-            }}>
+                 style={{
+                     background: `url(${backgroundImage}) no-repeat center center fixed`,
+                     backgroundSize: "cover",
+                     padding: "50px 0",
+                     textAlign: "center",
+                     color: "white"
+                 }}>
                 <motion.span
                     style={{display: "inline-block"}}
                     animate={{x: [null, 60, 0]}}
@@ -41,7 +42,7 @@ function HomePage() {
 
             </div>
             <WidgetList/>
-            <br /> <br />
+            <br/> <br/>
         </>
     );
 }

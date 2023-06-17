@@ -38,11 +38,8 @@
 }
 
 
-
-
 .header-container {
   position: relative;
-
 }
 
 .header-background {
@@ -54,6 +51,5 @@
   object-fit: cover;
   z-index: -1;
   background-repeat: no-repeat;
-
 }
 
