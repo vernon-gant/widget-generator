@@ -37,6 +37,7 @@ function Posts({posts = [], loading}) {
                                 <br/><h5 className="card-title">
                                     <a
                                         href={`https://www.reddit.com${post.url}`}
+                                        target={'_blank'}
                                         style={{
                                             color: '#9b4db7',
                                             textDecoration: 'underline #91842a',//orchid;
