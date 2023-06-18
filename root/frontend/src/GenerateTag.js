@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Button, Modal} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faCopy} from "@fortawesome/free-solid-svg-icons";
+import './css/Error.css'
 
 function GenerateTag() {
     const [showModal, setShowModal] = useState(false);
@@ -32,14 +33,14 @@ function GenerateTag() {
 
     return (
         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-            <Button variant={copied ? "success" : "primary"} onClick={handleButtonClick}>
+            <Button className='button-85'variant={copied ? "outline-info" : "info"} onClick={handleButtonClick}>
                 <FontAwesomeIcon icon={copied ? faCheck : faCopy} className="mr-2"/>
                 {copied ? "Copied!" : "Generate Tag"}
             </Button>
 
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Generate Tag</Modal.Title>
+                    <Modal.Title><b>Generate Tag</b></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
           <pre>
@@ -47,7 +48,7 @@ function GenerateTag() {
 <script src="http://127.0.0.1:4000/templates/news_wall.js" type="text/javascript" async></script>`}</code>
           </pre>
                     <Button
-                        variant={copied ? "success" : "secondary"}
+                        variant={copied ? "success" : "info"}
                         onClick={handleCopyCode}
                         className="mt-3"
                     >
@@ -56,7 +57,7 @@ function GenerateTag() {
                     </Button>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
+                    <Button variant="outline-danger" onClick={handleCloseModal}>
                         Close
                     </Button>
                     {/* Add any additional buttons or actions here */}
