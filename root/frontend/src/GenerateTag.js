@@ -31,6 +31,7 @@ function GenerateTag() {
         return subreddit || "default"; // Replace "default" with a fallback subreddit if needed
     };
 
+
     return (
         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
             <Button className='button-85'variant={copied ? "outline-info" : "info"} onClick={handleButtonClick}>
@@ -38,24 +39,40 @@ function GenerateTag() {
                 {copied ? "Copied!" : "Generate Tag"}
             </Button>
 
-            <Modal show={showModal} onHide={handleCloseModal}>
+            <Modal show={showModal} onHide={handleCloseModal} size="lg" centered>
                 <Modal.Header closeButton>
                     <Modal.Title><b>Generate Tag</b></Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-          <pre>
-            <code>{`<smedia-widget data-subreddit="${getSubreddit()}"></smedia-widget>
+               <Modal.Body>
+
+
+  <div className="mt-3">
+    <ol>
+      <li> <i><b>Copy the generated code snippet of the wall widget:</b> </i> </li>
+      <code>
+      <pre className="bg-light p-3 shadow">
+    <code>{`<smedia-widget data-subreddit="${getSubreddit()}"></smedia-widget>
 <script src="http://127.0.0.1:4000/templates/news_wall.js" type="text/javascript" async></script>`}</code>
-          </pre>
-                    <Button
-                        variant={copied ? "success" : "info"}
-                        onClick={handleCopyCode}
-                        className="mt-3"
-                    >
-                        <FontAwesomeIcon icon={faCopy} className="mr-2"/>
-                        {copied ? "Copied!" : "Copy Code"}
-                    </Button>
-                </Modal.Body>
+  </pre>
+      </code>
+          <Button
+    variant={copied ? "success" : "info"}
+    onClick={handleCopyCode}
+    className="mt-3"
+  >
+    <FontAwesomeIcon icon={faCopy} className="mr-2"/>
+    {copied ? "Copied!" : "Copy Code"}
+  </Button>
+        <br/><br/>
+      <li> <i> <b>Paste the code snippet to your HTML webpage:</b> </i> </li>
+      <p>
+        Access your <em> <u> HTML website </u></em>  in edit mode and paste the code snippet where you want your widget to appear.
+        Once the widget is saved on your webpage, any customizations you make in RSS.app will be automatically applied to the widget.
+      </p>
+    </ol>
+  </div>
+</Modal.Body>
+
                 <Modal.Footer>
                     <Button variant="outline-danger" onClick={handleCloseModal}>
                         Close
