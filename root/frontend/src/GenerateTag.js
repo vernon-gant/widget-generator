@@ -49,6 +49,7 @@ function GenerateTag() {
   <div className="mt-3">
     <ol>
       <li> <i><b>Copy the generated code snippet of the wall widget:</b> </i> </li>
+        <br/>
       <code>
       <pre className="bg-light p-3 shadow">
     <code>{`<smedia-widget data-subreddit="${getSubreddit()}"></smedia-widget>
@@ -65,10 +66,10 @@ function GenerateTag() {
   </Button>
         <br/><br/>
       <li> <i> <b>Paste the code snippet to your HTML webpage:</b> </i> </li>
-      <p>
-        Access your <em> <u> HTML website </u></em>  in edit mode and paste the code snippet where you want your widget to appear.
-        Once the widget is saved on your webpage, any customizations you make in RSS.app will be automatically applied to the widget.
-      </p>
+      <p className="mt-3 p-3">
+  Access your <em><u>HTML website</u></em> and paste the code snippet where you want the widget to appear.
+  Once the widget is saved on your webpage, any changes you make in the WidgetGenerator App will be automatically reflected in the widget.
+</p>
     </ol>
   </div>
 </Modal.Body>
