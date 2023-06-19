@@ -1,12 +1,12 @@
 import React from "react";
 import Navigation from "./Navba";
-import Posts from "./Posts";
+import Posts from "../pages/Posts";
 import FetchPosts from "./FetchPosts";
-import {useSubreddit} from "./Utils";
-import Loader from "./Loader";
-import Error from "./Error";
+import {useSubreddit} from "../hooks/Utils";
+import Loader from "../hooks/Loader";
+import Error from "../hooks/Error";
 import BackButton from "./BackButton";
-import './css/DisplayPosts.css';
+import '../css/DisplayPosts.css';
 
 function DisplayPosts() {
     const subredditName = useSubreddit();

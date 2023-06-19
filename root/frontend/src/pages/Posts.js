@@ -2,9 +2,9 @@ import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCalendarAlt, faComments, faThumbsUp, faUser} from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Loader from "./Loader";
-import {formatDate} from './Utils';
-import GenerateTag from "./GenerateTag";
+import Loader from "../hooks/Loader";
+import {formatDate} from '../hooks/Utils';
+import GenerateTag from "../components/GenerateTag";
 
 function Posts({posts = [], loading}) {
     if (loading) return <Loader/>;
