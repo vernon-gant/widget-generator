@@ -67,7 +67,7 @@ function GenerateTag() {
       <li> <i> <b>Paste the code snippet to your HTML webpage:</b> </i> </li>
       <p>
         Access your <em> <u> HTML website </u></em>  in edit mode and paste the code snippet where you want your widget to appear.
-        Once the widget is saved on your webpage, any customizations you make in the app will be automatically applied to the widget.
+        Once the widget is saved on your webpage, any customizations you make in RSS.app will be automatically applied to the widget.
       </p>
     </ol>
   </div>
