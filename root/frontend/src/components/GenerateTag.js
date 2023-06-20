@@ -67,8 +67,10 @@ function GenerateTag() {
         <br/><br/>
       <li> <i> <b>Paste the code snippet to your HTML webpage:</b> </i> </li>
       <p className="mt-3 p-3">
-  Access your <em><u>HTML website</u></em> and paste the code snippet where you want the widget to appear.
-  Once the widget is saved on your webpage, any changes you make in the WidgetGenerator App will be automatically reflected in the widget.
+  Copy the generated code snippet.
+Open your website or app's development environment.
+Paste the code snippet into the appropriate section of your website or app where you want the widget to appear.
+Save and deploy your changes.
 </p>
     </ol>
   </div>
