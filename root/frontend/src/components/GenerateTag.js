@@ -34,7 +34,7 @@ function GenerateTag() {
 
     return (
         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-            <Button className='button-85'variant={copied ? "outline-info" : "info"} onClick={handleButtonClick}>
+            <Button className='button-85' variant={copied ? "outline-info" : "info"} onClick={handleButtonClick}>
                 <FontAwesomeIcon icon={copied ? faCheck : faCopy} className="mr-2"/>
                 {copied ? "Copied!" : "Generate Tag"}
             </Button>
@@ -43,38 +43,38 @@ function GenerateTag() {
                 <Modal.Header closeButton>
                     <Modal.Title><b>Generate Tag</b></Modal.Title>
                 </Modal.Header>
-               <Modal.Body>
+                <Modal.Body>
 
 
-  <div className="mt-3">
-    <ol>
-      <li> <i><b>Copy the generated code snippet of the wall widget:</b> </i> </li>
-        <br/>
-      <code>
+                    <div className="mt-3">
+                        <ol>
+                            <li><i><b>Copy the generated code snippet of the wall widget:</b> </i></li>
+                            <br/>
+                            <code>
       <pre className="bg-light p-3 shadow">
     <code>{`<smedia-widget data-subreddit="${getSubreddit()}"></smedia-widget>
 <script src="http://127.0.0.1:4000/templates/news_wall.js" type="text/javascript" async></script>`}</code>
   </pre>
-      </code>
-          <Button
-    variant={copied ? "success" : "info"}
-    onClick={handleCopyCode}
-    className="mt-3"
-  >
-    <FontAwesomeIcon icon={faCopy} className="mr-2"/>
-    {copied ? "Copied!" : "Copy Code"}
-  </Button>
-        <br/><br/>
-      <li> <i> <b>Paste the code snippet to your HTML webpage:</b> </i> </li>
-      <p className="mt-3 p-3">
-  Copy the generated code snippet.
-Open your website or app's development environment.
-Paste the code snippet into the appropriate section of your website or app where you want the widget to appear.
-Save and deploy your changes.
-</p>
-    </ol>
-  </div>
-</Modal.Body>
+                            </code>
+                            <Button
+                                variant={copied ? "success" : "info"}
+                                onClick={handleCopyCode}
+                                className="mt-3"
+                            >
+                                <FontAwesomeIcon icon={faCopy} className="mr-2"/>
+                                {copied ? "Copied!" : "Copy Code"}
+                            </Button>
+                            <br/><br/>
+                            <li><i> <b>Paste the code snippet to your HTML webpage:</b> </i></li>
+                            <p className="mt-3 p-3">
+                                To add your newly-generated widget to your website or app,
+                                begin by copying the code snippet. Next, navigate to the desired location in your
+                                development environment, paste the code snippet, and save and deploy your changes to
+                                complete the integration.
+                            </p>
+                        </ol>
+                    </div>
+                </Modal.Body>
 
                 <Modal.Footer>
                     <Button variant="outline-danger" onClick={handleCloseModal}>
