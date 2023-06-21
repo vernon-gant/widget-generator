@@ -7,6 +7,7 @@ import Loader from "../hooks/Loader";
 import Error from "../hooks/Error";
 import BackButton from "./BackButton";
 import '../css/DisplayPosts.css';
+import BackToTopButton from "./BackToTopButton";
 
 function DisplayPosts() {
     const subredditName = useSubreddit();
@@ -19,6 +20,7 @@ function DisplayPosts() {
             <Navigation/>
             <br/> <br/> <br/> <br/>
             <BackButton/>
+            <BackToTopButton/>
 
             <div style={{textAlign: "center"}}>
                 <h1 className="twelve">

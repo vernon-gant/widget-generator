@@ -45,10 +45,11 @@ function GenerateTag() {
                 </Modal.Header>
                 <Modal.Body>
 
-
                     <div className="mt-3">
                         <ol>
-                            <li><i><b>Copy the generated code snippet of the wall widget:</b> </i></li>
+                            <b className="heading">
+                                <li><i> Copy the generated code snippet of the wall widget</i></li>
+                            </b>
                             <br/>
                             <code>
       <pre className="bg-light p-3 shadow">
@@ -64,9 +65,11 @@ function GenerateTag() {
                                 <FontAwesomeIcon icon={faCopy} className="mr-2"/>
                                 {copied ? "Copied!" : "Copy Code"}
                             </Button>
-                            <br/><br/>
-                            <li><i> <b>Paste the code snippet to your HTML webpage:</b> </i></li>
-                            <p className="mt-3 p-3">
+                            <br/><br/><br/>
+                            <b className="heading">
+                                <li><i>Paste the code snippet to your HTML webpage</i></li>
+                            </b>
+                            <p className="mt-2 p-2">
                                 To add your newly-generated widget to your website or app,
                                 begin by copying the code snippet. Next, navigate to the desired location in your
                                 development environment, paste the code snippet, and save and deploy your changes to
@@ -80,10 +83,10 @@ function GenerateTag() {
                     <Button variant="outline-danger" onClick={handleCloseModal}>
                         Close
                     </Button>
-                    {/* Add any additional buttons or actions here */}
                 </Modal.Footer>
             </Modal>
         </div>
+
     );
 }
 
