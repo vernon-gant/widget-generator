@@ -1,13 +1,13 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import backgroundImage from './assets/widget2.png';
 import {motion} from "framer-motion";
-import Navigation from './Navba';
-import AboutUsPage from './AboutUs';
-import ImpressPage from "./Impressum";
-import backgroundImage from './img/widget2.png';
-import SearchBox from "./SearchBox";
-import WidgetList from "./FrequentlyUsedWidgets";
-import DisplayPosts from "./DisplayPosts";
+import Navigation from './components/Navba';
+import AboutUsPage from './pages/AboutUs';
+import ImpressPage from "./pages/Impressum";
+import SearchBox from "./components/SearchBox";
+import DisplayPosts from "./components/DisplayPosts";
+import WidgetList from "./components/FrequentlyUsedWidgets";
 
 
 function HomePage() {

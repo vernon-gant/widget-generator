@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from './Navba';
+import Navigation from '../components/Navba';
 
 const ImpressPage = () => {
     return (
