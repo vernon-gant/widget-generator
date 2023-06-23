@@ -18,7 +18,7 @@ def create_app() -> Flask:
     flask_app = Flask(__name__)
     configure_logger(flask_app)
 
-    CORS(flask_app, origins='http://localhost:3000')
+    CORS(flask_app, origins=['http://localhost:3000', 'http://localhost'])
 
     flask_app.register_blueprint(reddit_route)
 

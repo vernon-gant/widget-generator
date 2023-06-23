@@ -1,0 +1,15 @@
+# Ignore Python compiled files
+**/*.pyc
+**/*.pyo
+**/__pycache__
+
+# Ignore virtual environment
+venv/
+test/
+
+# Ignore git files
+.git/
+.gitignore
+
+# Ignore environment variable file
+.env

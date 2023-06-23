@@ -54,7 +54,7 @@ function GenerateTag() {
                             <code>
       <pre className="bg-light p-3 shadow">
     <code>{`<smedia-widget data-subreddit="${getSubreddit()}"></smedia-widget>
-<script src="http://127.0.0.1:4000/templates/news_wall.js" type="text/javascript" async></script>`}</code>
+<script src="http://127.0.0.1/templates/news_wall.js" type="text/javascript" async></script>`}</code>
   </pre>
                             </code>
                             <Button

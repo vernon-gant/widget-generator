@@ -190,8 +190,8 @@ const fetchPosts = async (subreddit, limit) => {
 }
 
 const renderWidget = async (subreddit, limit, customTag) => {
-    //const posts = await fetchPosts(subreddit, limit);
-    const posts = {
+    const posts = await fetchPosts(subreddit, limit);
+    /*const posts = {
         "data": [
             {
                 "author": "zerogravity_levus",
@@ -344,7 +344,7 @@ const renderWidget = async (subreddit, limit, customTag) => {
                 "url": "/r/LevusWorkstation/comments/w0hf4q/technology_evolves_yet_we_still_hunch_over_a_desk/"
             }
         ]
-    }
+    }*/
     if (posts) {
         renderPosts(subreddit, posts.data, customTag);
     }

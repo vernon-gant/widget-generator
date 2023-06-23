@@ -1,0 +1,6 @@
+# Ignore node_modules, you will install modules in the Dockerfile
+node_modules
+
+# Ignore any logs
+*.log
+.gitignore
