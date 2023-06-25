@@ -346,7 +346,7 @@ const renderWidget = async (subreddit, limit, customTag) => {
         ]
     }*/
     if (posts) {
-        renderPosts(subreddit, posts.data, customTag);
+        renderPosts(subreddit, posts.posts, customTag);
     }
 }
 
