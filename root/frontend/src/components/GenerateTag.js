@@ -19,7 +19,7 @@ function GenerateTag() {
 
     const handleCopyCode = () => {
         const codeToCopy = `<smedia-widget data-subreddit="${getSubreddit()}"></smedia-widget>
-<script src="http://127.0.0.1:4000/templates/news_wall.js" type="text/javascript" async></script>`;
+<script src="http://127.0.0.1/templates/news_wall.js" type="text/javascript" async></script>`;
         navigator.clipboard.writeText(codeToCopy)
             .then(() => setCopied(true))
             .catch((error) => console.error("Error copying code:", error));
