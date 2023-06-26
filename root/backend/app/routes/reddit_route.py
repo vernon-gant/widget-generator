@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_cors import cross_origin
+from werkzeug.exceptions import BadRequest
 
 from ..parsers.reddit_parser import RedditAPIError, SubredditNotFoundError, get_reddit_posts, PrivateSubredditError
 
@@ -20,8 +21,12 @@ def reddit():
         # This is a preflight request. Respond accordingly.
         return {}
 
-    limit = int(request.args.get("limit", 10))
-    subreddit = request.args.get("subreddit", "all")
+    limit = request.args.get("limit", type=int)
+    subreddit = request.args.get("subreddit")
+
+    # check if both limit and subreddit are provided and not empty
+    if not limit or not subreddit:
+        raise BadRequest("Both 'limit' and 'subreddit' parameters must be provided and not be empty in the request query")
 
     try:
         return jsonify({"posts": get_reddit_posts(subreddit, limit)})
